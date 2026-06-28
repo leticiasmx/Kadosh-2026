@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kadosh 2026 – Perde Tudo, Ganha Mais</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<style>
+  :root {
+    --azul: #1E3A8A;
+    --azul-light: #2d52b8;
+    --laranja: #F97316;
+    --laranja-dark: #ea6c0a;
+    --branco: #FFFFFF;
+    --bege: #F8F5EF;
+    --verde: #2E7D32;
+    --cinza: #64748B;
+    --dark: #0f1e4a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--branco);
+    color: #1a1a2e;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    background: transparent;
+  }
+  nav.scrolled {
+    background: rgba(15, 30, 74, 0.97);
+    backdrop-filter: blur(12px);
+    padding: 0.7rem 2rem;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .nav-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: var(--branco);
+    letter-spacing: 2px;
+  }
+  .nav-logo span { color: var(--laranja); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--laranja); }
+  .nav-cta {
+    background: var(--laranja);
+    color: var(--branco) !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    font-weight: 600 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--laranja-dark) !important; color: var(--branco) !important; }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 25px; height: 2px; background: var(--branco); border-radius: 2px; transition: all 0.3s; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0f1e4a 0%, #1E3A8A 50%, #1a3070 100%);
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(249,115,22,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(30,58,138,0.4) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  /* Stars */
+  .stars {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle linear infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.3); }
+  }
+  /* Mountains silhouette */
+  .mountains {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 45%;
+  }
+  .mountain-svg {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Fire glow */
+  .fire-glow {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 200px;
+    background: radial-gradient(ellipse, rgba(249,115,22,0.3) 0%, transparent 70%);
+    animation: flicker 2s ease-in-out infinite alternate;
+  }
+  @keyframes flicker {
+    0% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+    100% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 2rem;
+    max-width: 850px;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(249,115,22,0.2);
+    border: 1px solid rgba(249,115,22,0.5);
+    color: var(--laranja);
+    padding: 0.4rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(10px);
+  }
+  .hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 900;
+    color: var(--branco);
+    line-height: 0.9;
+    letter-spacing: -2px;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+  }
+  .hero-title span { color: var(--laranja); display: block; }
+  .hero-tema {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+  .hero-tema strong {
+    color: var(--laranja);
+    font-weight: 700;
+    font-style: normal;
+  }
+  .hero-text {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.7);
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+  }
+  .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--laranja);
+    color: var(--branco);
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 8px 30px rgba(249,115,22,0.4);
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(249,115,22,0.5); background: var(--laranja-dark); }
+  .btn-secondary {
+    background: rgba(255,255,255,0.1);
+    color: var(--branco);
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.2); transform: translateY(-3px); }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+    color: rgba(255,255,255,0.5);
+    font-size: 1.5rem;
+    z-index: 10;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* COUNTDOWN */
+  #countdown {
+    background: var(--dark);
+    padding: 3rem 2rem;
+  }
+  .countdown-label {
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .countdown-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .count-item {
+    text-align: center;
+    min-width: 90px;
+  }
+  .count-number {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 900;
+    color: var(--laranja);
+    line-height: 1;
+    display: block;
+  }
+  .count-unit {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 0.3rem;
+  }
+  .count-sep {
+    font-size: 3rem;
+    color: rgba(249,115,22,0.3);
+    font-weight: 900;
+    align-self: flex-start;
+    margin-top: 0.2rem;
+  }
+
+  /* SECTION COMMONS */
+  section { padding: 6rem 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow {
+    display: inline-block;
+    color: var(--laranja);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    color: var(--dark);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .section-title.light { color: var(--branco); }
+  .section-sub {
+    font-size: 1rem;
+    color: var(--cinza);
+    max-width: 550px;
+    line-height: 1.7;
+  }
+  .section-sub.light { color: rgba(255,255,255,0.65); }
+
+  /* INFOS */
+  #infos { background: var(--bege); }
+  .info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .info-card {
+    background: var(--branco);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .info-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+  .info-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--azul), var(--azul-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.4rem;
+    color: var(--branco);
+  }
+  .info-icon.orange { background: linear-gradient(135deg, var(--laranja-dark), var(--laranja)); }
+  .info-icon.green { background: linear-gradient(135deg, #1b5e20, var(--verde)); }
+  .info-card h3 { font-size: 0.8rem; font-weight: 700; color: var(--cinza); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .info-card p { font-size: 1rem; font-weight: 600; color: var(--dark); line-height: 1.4; }
+
+  /* MAP */
+  .map-wrap {
+    margin-top: 3rem;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  }
+  .map-wrap iframe { width: 100%; height: 380px; border: none; display: block; }
+
+  /* SOBRE */
+  #sobre { background: var(--branco); }
+  .sobre-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+  .sobre-visual {
+    position: relative;
+  }
+  .sobre-card-main {
+    background: linear-gradient(135deg, var(--azul), var(--dark));
+    border-radius: 24px;
+    padding: 3rem 2rem;
+    text-align: center;
+    color: var(--branco);
+    position: relative;
+    overflow: hidden;
+  }
+  .sobre-card-main::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    right: -20%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(249,115,22,0.15);
+  }
+  .sobre-card-main .big-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .sobre-card-main h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+  .sobre-card-main p { color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.6; }
+  .sobre-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .stat-box {
+    background: rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 1rem;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .stat-box .num {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--laranja);
+    display: block;
+  }
+  .stat-box .lbl { font-size: 0.75rem; color: rgba(255,255,255,0.55); }
+  .sobre-text p { font-size: 1.05rem; color: var(--cinza); line-height: 1.8; margin-bottom: 1.5rem; }
+  .sobre-text .highlight {
+    font-size: 1.2rem;
+    color: var(--dark);
+    font-weight: 600;
+    font-style: italic;
+    border-left: 3px solid var(--laranja);
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  /* INCLUSO */
+  #incluso { background: var(--dark); }
+  .incluso-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+  .incluso-item {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+  }
+  .incluso-item:hover {
+    background: rgba(249,115,22,0.1);
+    border-color: rgba(249,115,22,0.3);
+    transform: translateY(-3px);
+  }
+  .incluso-item i {
+    font-size: 1.4rem;
+    color: var(--laranja);
+    min-width: 30px;
+    text-align: center;
+  }
+  .incluso-item span { color: rgba(255,255,255,0.85); font-size: 0.9rem; font-weight: 500; }
+
+  /* PROGRAMACAO */
+  #programacao { background: var(--bege); }
+  .prog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .prog-dia {
+    background: var(--branco);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transition: transform 0.3s;
+  }
+  .prog-dia:hover { transform: translateY(-5px); }
+  .prog-header {
+    padding: 1.5rem;
+    text-align: center;
+  }
+  .prog-header.azul { background: linear-gradient(135deg, var(--dark), var(--azul)); }
+  .prog-header.laranja { background: linear-gradient(135deg, var(--laranja-dark), var(--laranja)); }
+  .prog-header.verde { background: linear-gradient(135deg, #1b5e20, var(--verde)); }
+  .prog-header h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    color: var(--branco);
+    font-size: 1.1rem;
+  }
+  .prog-header .dia-num {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.3);
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1;
+    margin-bottom: 0.2rem;
+  }
+  .prog-body { padding: 1.5rem; }
+  .prog-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .prog-item:last-child { border-bottom: none; }
+  .prog-item i { color: var(--laranja); font-size: 0.8rem; margin-top: 0.2rem; min-width: 14px; }
+  .prog-item span { font-size: 0.88rem; color: #4a5568; line-height: 1.4; }
+  .prog-item .hora { font-weight: 700; color: var(--azul); margin-right: 0.3rem; }
+
+  /* CHECKLIST */
+  #checklist { background: var(--branco); }
+  .checklist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 0.8rem;
+    margin-top: 3rem;
+  }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 1rem;
+    background: var(--bege);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+    border: 2px solid transparent;
+  }
+  .check-item:hover { border-color: var(--laranja); }
+  .check-item.checked { background: rgba(249,115,22,0.08); border-color: var(--laranja); }
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 2px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    font-size: 0.7rem;
+    color: var(--branco);
+  }
+  .check-item.checked .check-box {
+    background: var(--laranja);
+    border-color: var(--laranja);
+  }
+  .check-label { font-size: 0.9rem; color: #4a5568; font-weight: 500; }
+
+  /* GALERIA */
+  #galeria { background: var(--dark); }
+  .galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+  .galeria-item {
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .galeria-item:hover { transform: scale(1.03); border-color: var(--laranja); }
+  .galeria-item:nth-child(1) { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+  .galeria-placeholder {
+    text-align: center;
+    color: rgba(255,255,255,0.25);
+    padding: 1.5rem;
+  }
+  .galeria-placeholder i { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
+  .galeria-placeholder span { font-size: 0.75rem; }
+  .galeria-item:nth-child(1) .galeria-placeholder i { font-size: 3rem; }
+  .galeria-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15,30,74,0.7), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+    color: var(--branco);
+    font-size: 0.8rem;
+  }
+  .galeria-item:hover .galeria-overlay { opacity: 1; }
+
+  /* FAQ */
+  #faq { background: var(--bege); }
+  .faq-list { margin-top: 3rem; display: flex; flex-direction: column; gap: 1rem; }
+  .faq-item {
+    background: var(--branco);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 1.3rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    text-align: left;
+    gap: 1rem;
+    transition: background 0.2s;
+  }
+  .faq-question:hover { background: rgba(0,0,0,0.02); }
+  .faq-question span {
+    font-weight: 600;
+    color: var(--dark);
+    font-size: 0.95rem;
+  }
+  .faq-question i { color: var(--laranja); transition: transform 0.3s; flex-shrink: 0; }
+  .faq-item.open .faq-question i { transform: rotate(180deg); }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s;
+  }
+  .faq-item.open .faq-answer { max-height: 300px; }
+  .faq-answer p {
+    padding: 0 1.5rem 1.3rem;
+    color: var(--cinza);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  /* INSCRICAO CTA */
+  #inscricao {
+    background: linear-gradient(135deg, var(--azul) 0%, var(--dark) 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  #inscricao::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -20%;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: rgba(249,115,22,0.08);
+  }
+  #inscricao::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+  .inscricao-content { position: relative; z-index: 1; }
+  .inscricao-content .big-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: var(--branco);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .inscricao-content .big-text span { color: var(--laranja); }
+  .inscricao-content p { color: rgba(255,255,255,0.65); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.7; }
+  .btn-cta-big {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: var(--laranja);
+    color: var(--branco);
+    padding: 1.2rem 3rem;
+    border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    text-decoration: none;
+    box-shadow: 0 10px 40px rgba(249,115,22,0.4);
+    transition: all 0.3s;
+  }
+  .btn-cta-big:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 16px 50px rgba(249,115,22,0.55); }
+
+  /* FOOTER */
+  footer {
+    background: #080f26;
+    color: rgba(255,255,255,0.6);
+    padding: 4rem 2rem 2rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .footer-brand .logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.8rem;
+    color: var(--branco);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+  }
+  .footer-brand .logo span { color: var(--laranja); }
+  .footer-brand p { font-size: 0.85rem; line-height: 1.7; margin-top: 0.5rem; max-width: 300px; }
+  .footer-brand .address { margin-top: 1rem; font-size: 0.85rem; line-height: 1.8; }
+  .footer-brand .address i { color: var(--laranja); margin-right: 0.4rem; }
+  .footer-col h4 { color: var(--branco); font-size: 0.9rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: 0.5px; }
+  .footer-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 0.4rem 0;
+    transition: color 0.2s;
+  }
+  .footer-link:hover { color: var(--laranja); }
+  .footer-link i { width: 20px; text-align: center; }
+  .social-links { display: flex; gap: 0.8rem; margin-top: 0.5rem; }
+  .social-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: all 0.3s;
+    font-size: 1rem;
+  }
+  .social-btn:hover { background: var(--laranja); border-color: var(--laranja); color: var(--branco); transform: translateY(-3px); }
+  .footer-map { border-radius: 14px; overflow: hidden; margin-top: 1rem; }
+  .footer-map iframe { width: 100%; height: 160px; border: none; display: block; filter: brightness(0.8) saturate(0.8); }
+  .footer-bottom {
+    max-width: 1100px;
+    margin: 2rem auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-bottom a { color: var(--laranja); text-decoration: none; }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .nav-links.open {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--dark);
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      z-index: 999;
+    }
+    .nav-links.open a { font-size: 1.2rem; }
+    .sobre-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .prog-grid { grid-template-columns: 1fr; }
+    .galeria-grid { grid-template-columns: repeat(2, 1fr); }
+    .galeria-item:nth-child(1) { grid-column: span 2; }
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 4rem 1.2rem; }
+    .info-cards { grid-template-columns: 1fr; }
+    .incluso-grid { grid-template-columns: 1fr; }
+    .galeria-grid { grid-template-columns: 1fr 1fr; }
+    .count-sep { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">KADOSH <span>2026</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#infos">Informações</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#programacao">Programação</a></li>
+    <li><a href="#faq">Dúvidas</a></li>
+    <li><a href="https://forms.gle/39FQL2vgR5UzzEWV6" target="_blank" class="nav-cta">Inscreva-se</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="stars" id="stars"></div>
+
+  <!-- Mountain SVG -->
+  <div class="mountains">
+    <svg class="mountain-svg" viewBox="0 0 1440 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <polygon points="0,400 200,100 350,220 500,50 650,200 800,80 950,250 1100,100 1300,200 1440,120 1440,400" fill="rgba(15,30,74,0.8)"/>
+      <polygon points="0,400 150,200 300,300 450,150 600,280 750,180 900,320 1050,200 1200,300 1440,220 1440,400" fill="rgba(10,20,60,0.9)"/>
+      <polygon points="0,400 0,340 200,300 400,360 600,320 800,360 1000,310 1200,350 1440,320 1440,400" fill="#080f26"/>
+    </svg>
+  </div>
+
+  <div class="fire-glow"></div>
+
+  <!-- Fire emoji center -->
+  <div style="position:absolute;bottom:17%;left:50%;transform:translateX(-50%);font-size:2.5rem;z-index:5;animation:flicker 1.5s ease-in-out infinite alternate;">🔥</div>
+
+  <div class="hero-content">
+    <div class="hero-badge" data-aos="fade-down">Acampamento de Jovens · Timon/MA</div>
+    <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
+      KADOSH
+      <span>2026</span>
+    </h1>
+    <p class="hero-tema" data-aos="fade-up" data-aos-delay="200">"<strong>Perde Tudo, Ganha Mais</strong>"</p>
+    <p class="hero-text" data-aos="fade-up" data-aos-delay="300">
+      Um final de semana para deixar para trás tudo aquilo que impede você de viver plenamente o propósito de Deus. Viva dias de comunhão, diversão, crescimento espiritual e experiências que marcarão sua vida.
+    </p>
+    <div class="hero-btns" data-aos="fade-up" data-aos-delay="400">
+      <a href="https://forms.gle/39FQL2vgR5UzzEWV6" target="_blank" class="btn-primary">
+        <i class="fas fa-pen"></i> Quero me inscrever
+      </a>
+      <a href="#programacao" class="btn-secondary">
+        <i class="fas fa-calendar-alt"></i> Ver programação
+      </a>
+    </div>
+  </div>
+
+  <div class="scroll-indicator"><i class="fas fa-chevron-down"></i></div>
+</section>
+
+<!-- COUNTDOWN -->
+<div id="countdown">
+  <p class="countdown-label">Faltam para o Kadosh 2026</p>
+  <div class="countdown-grid">
+    <div class="count-item">
+      <span class="count-number" id="days">--</span>
+      <span class="count-unit">dias</span>
+    </div>
+    <span class="count-sep">:</span>
+    <div class="count-item">
+      <span class="count-number" id="hours">--</span>
+      <span class="count-unit">horas</span>
+    </div>
+    <span class="count-sep">:</span>
+    <div class="count-item">
+      <span class="count-number" id="minutes">--</span>
+      <span class="count-unit">min</span>
+    </div>
+    <span class="count-sep">:</span>
+    <div class="count-item">
+      <span class="count-number" id="seconds">--</span>
+      <span class="count-unit">seg</span>
+    </div>
+  </div>
+</div>
+
+<!-- INFORMAÇÕES -->
+<section id="infos">
+  <div class="container">
+    <div data-aos="fade-up">
+      <span class="section-eyebrow">📋 Informações Gerais</span>
+      <h2 class="section-title">Tudo que você precisa saber</h2>
+      <p class="section-sub">Organize-se e garanta sua vaga nessa experiência transformadora.</p>
+    </div>
+    <div class="info-cards">
+      <div class="info-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="info-icon"><i class="fas fa-calendar-alt"></i></div>
+        <h3>Data</h3>
+        <p>31 de julho a 2 de agosto de 2026</p>
+      </div>
+      <div class="info-card" data-aos="fade-up" data-aos-delay="150">
+        <div class="info-icon orange"><i class="fas fa-bus"></i></div>
+        <h3>Saída</h3>
+        <p>31 de julho às 18h30</p>
+      </div>
+      <div class="info-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="info-icon green"><i class="fas fa-map-marker-alt"></i></div>
+        <h3>Local de Saída</h3>
+        <p>Primeira Igreja Batista de Timon<br><small style="color:#999;font-size:0.85rem">Av. Jaime Rios, 488 – Parque Piauí</small></p>
+      </div>
+      <div class="info-card" data-aos="fade-up" data-aos-delay="250">
+        <div class="info-icon"><i class="fas fa-moon"></i></div>
+        <h3>Duração</h3>
+        <p>3 dias de imersão e experiência com Deus</p>
+      </div>
+    </div>
+
+    <div class="map-wrap" data-aos="fade-up" data-aos-delay="200">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3974.0528611092263!2d-42.83002832525835!3d-5.095156094881792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x78e37832aca8cf7%3A0x948fbd60031cab60!2sPrimeira%20Igreja%20Batista%20Timon!5e0!3m2!1spt-BR!2sbr!4v1782665676037!5m2!1spt-BR!2sbr"
+        allowfullscreen="" loading="lazy">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="sobre-visual" data-aos="fade-right">
+        <div class="sobre-card-main">
+          <span class="big-icon">⛺</span>
+          <h3>Kadosh 2026</h3>
+          <p>Um acampamento preparado para proporcionar experiências transformadoras com Deus.</p>
+          <div class="sobre-stats">
+            <div class="stat-box">
+              <span class="num">3</span>
+              <span class="lbl">Dias</span>
+            </div>
+            <div class="stat-box">
+              <span class="num">∞</span>
+              <span class="lbl">Memórias</span>
+            </div>
+            <div class="stat-box">
+              <span class="num">1</span>
+              <span class="lbl">Propósito</span>
+            </div>
+            <div class="stat-box">
+              <span class="num">PIB</span>
+              <span class="lbl">Timon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sobre-text" data-aos="fade-left">
+        <span class="section-eyebrow">Sobre o Acampamento</span>
+        <h2 class="section-title">O que é o Kadosh?</h2>
+        <p>O Kadosh é um acampamento preparado para proporcionar experiências transformadoras com Deus. Durante três dias você viverá momentos de comunhão, diversão, esportes, louvor, ministrações, desafios e amizades que permanecerão por toda a vida.</p>
+        <div class="highlight">"Perde Tudo, Ganha Mais" — abrir mão do que afasta de Deus é ganhar uma vida muito mais plena em Cristo.</div>
+        <p>Uma oportunidade única de encontro consigo mesmo, com os outros e, acima de tudo, com Deus. Venha viver dias que você nunca vai esquecer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- O QUE ESTÁ INCLUSO -->
+<section id="incluso">
+  <div class="container">
+    <div data-aos="fade-up" style="text-align:center">
+      <span class="section-eyebrow">✅ Após confirmação do pagamento</span>
+      <h2 class="section-title light">Tudo incluso na sua inscrição</h2>
+      <p class="section-sub light" style="margin:0 auto">Você não precisa se preocupar com nada além de viver essa experiência.</p>
+    </div>
+    <div class="incluso-grid">
+      <div class="incluso-item" data-aos="fade-up" data-aos-delay="50"><i class="fas fa-bus"></i><span>Transporte (ida e volta)</span></div>
+      <div class="incluso-item" data-aos="fade-up" data-aos-delay="80"><i class="fas fa-bed"></i><span>Hospedagem completa</span></div>
+      <div class="incluso-item" data-aos="fade-up" data-aos-delay="100"><i class="fas fa-coffee"></i><span>Café da manhã</span></div>
+      <div class="incluso-item" data-aos="fade-up" data-aos-delay="120"><i class="fas fa-utensils"></i><span>Almoço e jantar</span></div>
+      <div class="incluso-item" data-aos="fade-up" data-aos-delay="140"><i class="fas fa-cookie-bite"></i><span>Lanches</span></div>
+      <div class="incluso-item" data-aos="fade-up" data-aos-delay="180"><i class="fas fa-gift"></i><span>Brindes</span></div>
+      <div class="incluso-item" data-aos="fade-up" data-aos-delay="200"><i class="fas fa-trophy"></i><span>Gincanas e esportes</span></div>
+      <div class="incluso-item" data-aos="fade-up" data-aos-delay="220"><i class="fas fa-gamepad"></i><span>Jogos e dinâmicas</span></div>
+      <div class="incluso-item" data-aos="fade-up" data-aos-delay="240"><i class="fas fa-star"></i><span>Noite temática</span></div>
+      <div class="incluso-item" data-aos="fade-up" data-aos-delay="260"><i class="fas fa-bible"></i><span>Ministrações e cultos</span></div>
+      <div class="incluso-item" data-aos="fade-up" data-aos-delay="280"><i class="fas fa-music"></i><span>Louvor e adoração</span></div>
+      <div class="incluso-item" data-aos="fade-up" data-aos-delay="300"><i class="fas fa-hands-praying"></i><span>Momentos de oração</span></div>
+      <div class="incluso-item" data-aos="fade-up" data-aos-delay="320"><i class="fas fa-medal"></i><span>Premiações</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMAÇÃO -->
+<section id="programacao">
+  <div class="container">
+    <div data-aos="fade-up">
+      <span class="section-eyebrow">📅 Programação</span>
+      <h2 class="section-title">O que vem por aí</h2>
+      <p class="section-sub">Três dias cheios de atividades, crescimento e muita alegria.</p>
+    </div>
+    <div class="prog-grid">
+      <div class="prog-dia" data-aos="fade-up" data-aos-delay="100">
+        <div class="prog-header azul">
+          <div class="dia-num">01</div>
+          <h3>Sexta-feira · 31/07</h3>
+        </div>
+        <div class="prog-body">
+          <div class="prog-item"><i class="fas fa-circle"></i><span><span class="hora">18h30</span> Saída da igreja</span></div>
+          <div class="prog-item"><i class="fas fa-circle"></i><span>Chegada ao sítio</span></div>
+          <div class="prog-item"><i class="fas fa-circle"></i><span>Credenciamento</span></div>
+          <div class="prog-item"><i class="fas fa-circle"></i><span>Jantar</span></div>
+          <div class="prog-item"><i class="fas fa-circle"></i><span>Abertura Oficial</span></div>
+          <div class="prog-item"><i class="fas fa-circle"></i><span>Luau</span></div>
+          <div class="prog-item"><i class="fas fa-circle"></i><span>Reflexão</span></div>
+        </div>
+      </div>
+      <div class="prog-dia" data-aos="fade-up" data-aos-delay="150">
+        <div class="prog-header laranja">
+          <div class="dia-num">02</div>
+          <h3>Sábado · 01/08</h3>
+        </div>
+        <div class="prog-body">
+          <div class="prog-item"><i class="fas fa-circle"></i><span>Café da manhã</span></div>
+          <div class="prog-item"><i class="fas fa-circle"></i><span>Devocional</span></div>
+          <div class="prog-item"><i class="fas fa-circle"></i><span>Roda de conversa</span></div>
+          <div class="prog-item"><i class="fas fa-circle"></i><span>Almoço</span></div>
+          <div class="prog-item"><i class="fas fa-circle"></i><span>Bingo</span></div>
+          <div class="prog-item"><i class="fas fa-circle"></i><span>Lanche</span></div>
+          <div class="prog-item"><i class="fas fa-circle"></i><span>Estudo</span></div>
+          <div class="prog-item"><i class="fas fa-circle"></i><span>Jantar</span></div>
+          <div class="prog-item"><i class="fas fa-circle"></i><span>Culto</span></div>
+          <div class="prog-item"><i class="fas fa-circle"></i><span>🌙 Noite temática</span></div>
+        </div>
+      </div>
+      <div class="prog-dia" data-aos="fade-up" data-aos-delay="200">
+        <div class="prog-header verde">
+          <div class="dia-num">03</div>
+          <h3>Domingo · 02/08</h3>
+        </div>
+        <div class="prog-body">
+          <div class="prog-item"><i class="fas fa-circle"></i><span>Café da manhã</span></div>
+          <div class="prog-item"><i class="fas fa-circle"></i><span>Devocional</span></div>
+          <div class="prog-item"><i class="fas fa-circle"></i><span>Encerramento</span></div>
+          <div class="prog-item"><i class="fas fa-circle"></i><span>Almoço</span></div>
+          <div class="prog-item"><i class="fas fa-circle"></i><span>Fotos</span></div>
+          <div class="prog-item"><i class="fas fa-circle"></i><span>Retorno para a igreja</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section id="checklist">
+  <div class="container">
+    <div data-aos="fade-up">
+      <span class="section-eyebrow">🎒 Checklist</span>
+      <h2 class="section-title">O que levar</h2>
+      <p class="section-sub">Clique nos itens para marcar o que você já separou!</p>
+    </div>
+    <div class="checklist-grid" id="checklistGrid">
+      <!-- Gerado por JS -->
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container" style="max-width:750px">
+    <div data-aos="fade-up" style="text-align:center">
+      <span class="section-eyebrow">❓ Perguntas Frequentes</span>
+      <h2 class="section-title">Ficou alguma dúvida?</h2>
+      <p class="section-sub" style="margin:0 auto">Veja as respostas para as perguntas mais comuns.</p>
+    </div>
+    <div class="faq-list" data-aos="fade-up" data-aos-delay="100">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Quem pode participar?</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer"><p>O Kadosh é voltado para jovens da Primeira Igreja Batista de Timon e suas comunidades. Entre em contato com a organização para saber mais sobre os critérios de participação.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>O transporte está incluso?</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer"><p>Sim! O transporte de ida e volta está completamente incluso no valor da inscrição. A saída será da Primeira Igreja Batista de Timon, Av. Jaime Rios, 488 – Parque Piauí, às 18h30 do dia 31 de julho.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Como será realizado o pagamento?</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer"><p>As informações de pagamento serão repassadas após a realização da inscrição pelo formulário oficial. Em caso de dúvidas, entre em contato com a organização pelo WhatsApp disponibilizado no rodapé desta página.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>O que preciso levar?</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer"><p>Confira o checklist completo nesta página: roupas para três dias, copo, prato, talheres, lençol, produtos de higiene, Bíblia, agasalho, tênis, chinelo, toalha, garrafa de água, rede, carregador, protetor solar, repelente e medicamentos pessoais.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Posso levar convidados?</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer"><p>Sim! Você pode convidar amigos para participar. Cada participante deve realizar sua própria inscrição através do formulário oficial. Quanto mais, melhor – a missão é transformar mais vidas!</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Onde será a saída?</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer"><p>A saída será na Primeira Igreja Batista de Timon, localizada na Av. Jaime Rios, 488 – Parque Piauí, Timon – MA. O embarque acontece às 18h30 do dia 31 de julho de 2026.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Como funciona a hospedagem?</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer"><p>A hospedagem durante todo o evento está inclusa no valor da inscrição. Você ficará acomodado no sítio durante os três dias do acampamento, com refeições e todas as atividades da programação.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA INSCRIÇÃO -->
+<section id="inscricao">
+  <div class="container inscricao-content">
+    <div data-aos="zoom-in">
+      <h2 class="big-text">Está pronto para <span>viver algo</span><br>que vai te transformar?</h2>
+      <p>Garanta sua vaga no Acampamento Kadosh 2026 e viva dias de encontro com Deus, comunhão e propósito.</p>
+      <a href="https://forms.gle/39FQL2vgR5UzzEWV6" target="_blank" class="btn-cta-big">
+        <i class="fas fa-fire"></i> Quero participar do Kadosh 2026
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">KADOSH <span>2026</span></div>
+      <p style="font-size:0.8rem;margin-top:0.3rem;color:rgba(255,255,255,0.4)">Promovido pela</p>
+      <p style="color:rgba(255,255,255,0.7);font-weight:600;margin-top:0.2rem">Primeira Igreja Batista de Timon</p>
+      <div class="address">
+        <p><i class="fas fa-map-marker-alt"></i> Av. Jaime Rios, 488</p>
+        <p style="padding-left:1.2rem">Parque Piauí · Timon – MA</p>
+      </div>
+      <div class="footer-map" style="margin-top:1.5rem">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3974.0528611092263!2d-42.83002832525835!3d-5.095156094881792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x78e37832aca8cf7%3A0x948fbd60031cab60!2sPrimeira%20Igreja%20Batista%20Timon!5e0!3m2!1spt-BR!2sbr!4v1782665676037!5m2!1spt-BR!2sbr"
+          allowfullscreen="" loading="lazy">
+        </iframe>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Menu Rápido</h4>
+      <a href="#infos" class="footer-link"><i class="fas fa-info-circle"></i> Informações</a>
+      <a href="#sobre" class="footer-link"><i class="fas fa-church"></i> Sobre o Kadosh</a>
+      <a href="#incluso" class="footer-link"><i class="fas fa-check-circle"></i> O que está incluso</a>
+      <a href="#programacao" class="footer-link"><i class="fas fa-calendar-alt"></i> Programação</a>
+      <a href="#checklist" class="footer-link"><i class="fas fa-list-check"></i> Checklist</a>
+      <a href="#faq" class="footer-link"><i class="fas fa-question-circle"></i> Perguntas frequentes</a>
+      <a href="https://forms.gle/39FQL2vgR5UzzEWV6" target="_blank" class="footer-link" style="color:var(--laranja)"><i class="fas fa-pen"></i> Inscrição</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <a href="https://wa.me/5586999841335" target="_blank" class="footer-link">
+        <i class="fab fa-whatsapp"></i> WhatsApp da organização
+      </a>
+      </div>
+      <div style="margin-top:2rem">
+        <a href="https://forms.gle/39FQL2vgR5UzzEWV6" target="_blank" class="btn-primary" style="font-size:0.85rem;padding:0.7rem 1.5rem;">
+          <i class="fas fa-pen"></i> Inscreva-se
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Kadosh · Primeira Igreja Batista de Timon. Todos os direitos reservados.</span>
+    <span>Feito com <i class="fas fa-heart" style="color:var(--laranja)"></i> para a glória de Deus</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+  // AOS init
+  AOS.init({ duration: 700, once: true, offset: 80 });
+
+  // Stars
+  const starsContainer = document.getElementById('stars');
+  for (let i = 0; i < 80; i++) {
+    const star = document.createElement('div');
+    star.classList.add('star');
+    const size = Math.random() * 3 + 1;
+    star.style.cssText = `
+      width:${size}px; height:${size}px;
+      top:${Math.random() * 70}%;
+      left:${Math.random() * 100}%;
+      animation-duration:${Math.random() * 4 + 2}s;
+      animation-delay:${Math.random() * 3}s;
+    `;
+    starsContainer.appendChild(star);
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+  });
+
+  // Countdown
+  function updateCountdown() {
+    const target = new Date('2026-07-31T18:30:00-03:00');
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) {
+      document.querySelector('#countdown').innerHTML = '<p style="text-align:center;color:var(--laranja);font-size:1.5rem;font-weight:700">🔥 O Kadosh começou! Nos vemos lá!</p>';
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('days').textContent = String(d).padStart(2, '0');
+    document.getElementById('hours').textContent = String(h).padStart(2, '0');
+    document.getElementById('minutes').textContent = String(m).padStart(2, '0');
+    document.getElementById('seconds').textContent = String(s).padStart(2, '0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // Checklist
+  const items = [
+    'Bíblia','Prato','Talheres','Copo',
+    'Roupa para três dias','Agasalho','Chinelo', 
+    'Roupa de banho','Toalha','Escova de dentes','Creme dental',
+    'Shampoo e condicionador','Sabonete','Protetor solar','Repelente',
+    'Garrafa de água','Medicamentos pessoais','Cobertor',
+    'Carregador de celular','Rede'
+  ];
+  const grid = document.getElementById('checklistGrid');
+  items.forEach(item => {
+    const el = document.createElement('div');
+    el.className = 'check-item';
+    el.innerHTML = `<div class="check-box"></div><span class="check-label">${item}</span>`;
+    el.addEventListener('click', () => {
+      el.classList.toggle('checked');
+      el.querySelector('.check-box').innerHTML = el.classList.contains('checked') ? '<i class="fas fa-check"></i>' : '';
+    });
+    grid.appendChild(el);
+  });
+
+  // FAQ
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+</body>
+</html>
